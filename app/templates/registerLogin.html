@@ -1,0 +1,156 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="row">
+<div class="col-md-8">
+
+    <div class="mt-5">
+    
+        {% with messages=get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            {% if category=="success" %}
+                <div class="alert alert-success ">
+                {{ message }}
+                </div>
+            {% else %}
+            <div class="alert alert-danger }}">
+                {{ message }}
+                </div>
+            {%endif%}
+            {% endfor %}
+            {% endif %}
+        {% endwith %}
+    <div class="content-section ">
+        <div class="container">
+            <div class="row">
+              <div class="col card p-3 mx-1">
+                  <h4>Login</h4>
+                  <form method="POST" action="{{ url_for('auth.login') }}">
+                        {{ log_form.hidden_tag() }}
+                        <fieldset class="form-group">
+                            <div class="form-group">
+                                {{ log_form.email.label(class="form-control-label") }}
+                                {% if log_form.email.errors %}
+                                    {{ log_form.email(class="form-control  is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in log_form.email.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ log_form.email(class="form-control ") }}
+                                {% endif %}
+                            </div>
+                            <div class="form-group">
+                                {{ log_form.password.label(class="form-control-label") }}
+                                {% if log_form.password.errors %}
+                                    {{ log_form.password(class="form-control  is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in log_form.password.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ log_form.password(class="form-control ") }}
+                                {% endif %}
+                            </div>
+                            <div class="form-check">
+                                {{ log_form.remember(class="form-check-input") }}
+                                {{ log_form.remember.label(class="form-check-label") }}
+                            </div>
+                        </fieldset>
+                        <div class="form-group text-right">
+                            {{ log_form.submit(class="btn btn-success") }}
+                        </div>
+                </form>      
+              </div>
+
+
+
+
+              <div class="col card p-3 mx-1">
+                  <h5>REGISTER</h5>
+                <form method="POST" action="{{ url_for('auth.signup') }}">
+                    {{ reg_form.hidden_tag() }}
+                   
+                    <div class="form-group">
+                        {{ reg_form.username.label(class="form-control-label sm") }}
+            
+                        {% if reg_form.username.errors %}
+                            {{ reg_form.username(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in reg_form.username.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ reg_form.username(class="form-control") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ reg_form.email.label(class="form-control-label") }}
+                        {% if reg_form.email.errors %}
+                            {{ reg_form.email(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in reg_form.email.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ reg_form.email(class="form-control") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ reg_form.password.label(class="form-control-label") }}
+                        {% if reg_form.password.errors %}
+                            {{ reg_form.password(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in reg_form.password.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ reg_form.password(class="form-control") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        {{ reg_form.confirm_password.label(class="form-control-label") }}
+                        {% if reg_form.confirm_password.errors %}
+                            {{ reg_form.confirm_password(class="form-control wa-validated") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.confirm_password.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ reg_form.confirm_password(class="form-control") }}
+                        {% endif %}
+                    </div>
+                   
+                    <div class="form-group">
+                        {{ reg_form.submit(class="btn btn-success") }}
+                    </div>
+                </form>
+              </div>
+            </div>
+
+
+
+
+
+
+
+       
+    </div>
+  
+</div>
+
+</div>
+<div class="col-md-4 mt-4">
+{% block sidebar %}
+{% endblock %}
+</div>
+
+
+  
+{% endblock content %}
